@@ -18,5 +18,9 @@ public interface UploadService {
 	public void bdContentRemove(HashMap<String, Object> map);
 
 	public void bdFileRemove(BoardFileDomain boardFileDomain);
+	
+	public BoardListDomain boardSelectOne(HashMap<String, Object> map);
+	
+	public List<BoardFileDomain> boardSelectOneFile(HashMap<String, Object> map);
 		
 }

@@ -69,6 +69,7 @@ public class UploadServiceImple implements UploadService {
 				int bdSeq = boardContentDomain.getBdSeq();
 				String mbId = boardContentDomain.getMbId();
 				
+				//파일저장부
 				List<MultipartFile> multipartFiles = request.getFiles("files");
 				
 				if(fileListVO.getIsEdit() != null) {
@@ -157,5 +158,17 @@ public class UploadServiceImple implements UploadService {
 	public void bdFileRemove(BoardFileDomain boardFileDomain) {
 		uploadMapper.bdFileRemove(boardFileDomain);
 	}
+	
+	@Override
+	public BoardListDomain boardSelectOne(HashMap<String, Object> map) {
+		return uploadMapper.boardSelectOne(map);
+	}
+	
+	@Override
+	public List<BoardFileDomain> boardSelectOneFile(HashMap<String, Object> map) {
+		return uploadMapper.boardSelectOneFile(map);
+	}
+	
+	
 
 }
