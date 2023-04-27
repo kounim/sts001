@@ -1,6 +1,10 @@
 package com.co.kr.controller;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,6 +64,10 @@ public class UserController {
 
 		String IP = CommonUtils.getClientIP(request);
 		
+		String MAC = getLocalMacAddress();
+		
+		
+		session.setAttribute("mac",MAC);
 		session.setAttribute("ip",IP);
 		session.setAttribute("id", loginDomain.getMbId());
 		session.setAttribute("mbLevel", loginDomain.getMbLevel());
@@ -72,6 +80,31 @@ public class UserController {
 		
 		return mav;
 	};
+	
+	 public String getLocalMacAddress() {
+		 	String result = "";
+			InetAddress ip;
+
+			try {
+				ip = InetAddress.getLocalHost();
+			   
+				NetworkInterface network = NetworkInterface.getByInetAddress(ip);
+				byte[] mac = network.getHardwareAddress();
+			   
+				StringBuilder sb = new StringBuilder();
+				for (int i = 0; i < mac.length; i++) {
+					sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
+				}
+					result = sb.toString();
+			} catch (UnknownHostException e) {
+				e.printStackTrace();
+			} catch (SocketException e){
+				e.printStackTrace();
+			}
+			    
+			return result;
+		 }
+	
 
 	@RequestMapping(value = "bdList")
 	public ModelAndView bdList() { 
@@ -82,6 +115,84 @@ public class UserController {
 		mav.setViewName("board/boardList.html");
 		return mav; 
 	};
+	
+	@RequestMapping(value = "seoulBoard")
+	public ModelAndView seoulBoard() { 
+		ModelAndView mav = new ModelAndView();
+		List<BoardListDomain> items = uploadService.seoulBoard();
+		System.out.println("items ==> "+ items);
+		mav.addObject("items", items);
+		mav.setViewName("region/seoul/seoulBoard.html");
+		return mav; 
+	};
+	
+	@RequestMapping(value = "gangBoard")
+	public ModelAndView gangBoard() { 
+		ModelAndView mav = new ModelAndView();
+		List<BoardListDomain> items = uploadService.gangBoard();
+		System.out.println("items ==> "+ items);
+		mav.addObject("items", items);
+		mav.setViewName("region/gang/boardList.html");
+		return mav; 
+	};
+	
+	@RequestMapping(value = "chungBoard")
+	public ModelAndView chungBoard() { 
+		ModelAndView mav = new ModelAndView();
+		List<BoardListDomain> items = uploadService.chungBoard();
+		System.out.println("items ==> "+ items);
+		mav.addObject("items", items);
+		mav.setViewName("region/chung/boardList.html");
+		return mav; 
+	};
+	
+	@RequestMapping(value = "gyeongBoard")
+	public ModelAndView gyeongBoard() { 
+		ModelAndView mav = new ModelAndView();
+		List<BoardListDomain> items = uploadService.gyeongBoard();
+		System.out.println("items ==> "+ items);
+		mav.addObject("items", items);
+		mav.setViewName("region/gyeong/boardList.html");
+		return mav; 
+	};
+	
+	@RequestMapping(value = "jeonBoard")
+	public ModelAndView jeonBoard() { 
+		ModelAndView mav = new ModelAndView();
+		List<BoardListDomain> items = uploadService.jeonBoard();
+		System.out.println("items ==> "+ items);
+		mav.addObject("items", items);
+		mav.setViewName("region/jeon/boardList.html");
+		return mav; 
+	};
+	
+	@RequestMapping(value = "etcBoard")
+	public ModelAndView etcBoard() { 
+		ModelAndView mav = new ModelAndView();
+		List<BoardListDomain> items = uploadService.etcBoard();
+		System.out.println("items ==> "+ items);
+		mav.addObject("items", items);
+		mav.setViewName("region/etc/boardList.html");
+		return mav; 
+	};
+	
+	@RequestMapping(value = "tradeBoard")
+	public ModelAndView tradeBoard() { 
+		ModelAndView mav = new ModelAndView();
+		List<BoardListDomain> items = uploadService.tradeBoard();
+		System.out.println("items ==> "+ items);
+		mav.addObject("items", items);
+		mav.setViewName("trade/boardList.html");
+		return mav; 
+	};
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@GetMapping("mbList")
 	public ModelAndView mbList(HttpServletRequest request) {
@@ -206,7 +317,7 @@ public class UserController {
 			LoginDomain loginDomain = LoginDomain.builder()
 					.mbId(loginVO.getId())
 					.mbPw(loginVO.getPw())
-					.mbLevel((totalcount == 0) ? "3" : "2")
+					.mbLevel((totalcount == 0) ? "3" : "1")
 					.mbIp(IP)
 					.mbUse("Y")
 					.build();
@@ -215,7 +326,7 @@ public class UserController {
 			if(loginVO.getAdmin() == null) {
 				session.setAttribute("ip",IP);
 				session.setAttribute("id", loginDomain.getMbId());
-				session.setAttribute("mbLevel", (totalcount == 0) ? "3" : "2");
+				session.setAttribute("mbLevel", (totalcount == 0) ? "3" : "1");
 				mav.setViewName("redirect:/bdList");
 			}else {
 				mav.setViewName("redirect:/mbList?page=1");

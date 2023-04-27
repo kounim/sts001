@@ -50,6 +50,24 @@ public class FileListController {
 		return mav;
 	}
 	
+	
+	@PostMapping(value = "seoulUpload")
+	public ModelAndView seoulUpload(FileListVO fileListVO, MultipartHttpServletRequest request, HttpServletRequest httpReq) throws IOException, ParseException {
+		ModelAndView mav = new ModelAndView();
+		int bdSeq = uploadService.fileProcess(fileListVO, request, httpReq);
+		fileListVO.setContent("");
+		fileListVO.setTitle("");
+
+		mav = bdSelectOneCall(fileListVO, String.valueOf(bdSeq),request);
+		mav.setViewName("/region/seoul/seoulBoard.html");
+		return mav;
+	}
+	
+	
+	
+	
+	
+	
 	public ModelAndView bdSelectOneCall(@ModelAttribute("fileListVO") FileListVO fileListVO, String bdSeq, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -70,7 +88,8 @@ public class FileListController {
 		session.setAttribute("files", fileList);
 
 		return mav;
-	}
+	}	
+	
 	
 	@GetMapping("edit")
 	public ModelAndView edit(FileListVO fileListVO, @RequestParam("bdSeq") String bdSeq, HttpServletRequest request) throws IOException {

@@ -3,7 +3,7 @@
     <header th:fragment="headerFragment">
        <div class="lnb">
            <div class="logo">
-                <a th:href="@{bdList}"> <span>SpringBoot</span> <span>STUDY</span></a>
+                <a th:href="@{bdList}"> <span></span> <span>ROCK SPIRIT</span></a>
            </div>
            
            <div class="useInfo">
@@ -12,13 +12,50 @@
            
            <ul class="nav">
 				<th:block>
-					<th:block th:if="${session.mbLevel}==3">
+					<th:block th:if="${session.mbLevel}==9">
                     <li class="on"><a class="menu1" th:href="@{mbList(page=1)}">맴버정보</a></li>
                		</th:block>
                	</th:block>
                <th:block>
-                   <li class="on"><a class="menu1" th:href="@{bdList}">보드정보</a></li>
+                   <li class="on"><a class="menu1" th:href="@{bdList}"> 자유게시판 </a></li>
                </th:block>
+               	<th:block>
+               		<details>
+               			<summary><li class="on"><a class="menu1"> *---지역별 찾기---* </a></li></summary>
+                		<th:block>
+                   			<li class="on"><a class="menu1" th:href="@{seoulBoard}">서울/경기 </a></li>
+               			</th:block>
+               			
+               			<th:block>
+                   			<li class="on"><a class="menu1" th:href="@{gangBoard}">강원</a></li>
+               			</th:block>
+               			
+               			<th:block>
+                   			<li class="on"><a class="menu1" th:href="@{chungBoard}">충청</a></li>
+               			</th:block>
+               			
+               			<th:block>
+                   			<li class="on"><a class="menu1" th:href="@{jeonBoard}">전라</a></li>
+               			</th:block>
+               			
+               			<th:block>
+                   			<li class="on"><a class="menu1" th:href="@{gyeongBoard}">경상</a></li>
+               			</th:block>
+               			
+               			<th:block>
+                   			<li class="on"><a class="menu1" th:href="@{etcBoard}">기타</a></li>
+               			</th:block>
+               			
+               		</details>
+               </th:block>
+               
+               <th:block>
+               		<th:block th:if="${session.mbLevel}>2">
+               		<li class="on"><a class="menu1" th:href="@{tradeBoard}"> 삽니다/팝니다 </a></li>
+               		</th:block>
+               </th:block>
+               
+               
            </ul>
        </div>
     </header>

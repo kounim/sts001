@@ -44,9 +44,40 @@ public class UploadServiceImple implements UploadService {
 	
 	@Override
 	public List<BoardListDomain> boardList() {
-		// TODO Auto-generated method stub
 		return uploadMapper.boardList();
 	}
+	//지역게시판
+	@Override
+	public List<BoardListDomain> seoulBoard(){
+		return uploadMapper.seoulBoard();
+	}
+	@Override
+	public List<BoardListDomain> gangBoard(){
+		return uploadMapper.gangBoard();
+	}
+	@Override
+	public List<BoardListDomain> chungBoard(){
+		return uploadMapper.chungBoard();
+	}
+	@Override
+	public List<BoardListDomain> jeonBoard(){
+		return uploadMapper.jeonBoard();
+	}
+	@Override
+	public List<BoardListDomain> gyeongBoard(){
+		return uploadMapper.gyeongBoard();
+	}
+	@Override
+	public List<BoardListDomain> etcBoard(){
+		return uploadMapper.etcBoard();
+	}
+	@Override
+	public List<BoardListDomain> tradeBoard(){
+		return uploadMapper.tradeBoard();
+	}
+	
+	
+	
 
 	@Override
 	public int fileProcess(FileListVO fileListVO, MultipartHttpServletRequest request, HttpServletRequest httpReq) {
@@ -163,12 +194,12 @@ public class UploadServiceImple implements UploadService {
 	public BoardListDomain boardSelectOne(HashMap<String, Object> map) {
 		return uploadMapper.boardSelectOne(map);
 	}
-	
+
 	@Override
 	public List<BoardFileDomain> boardSelectOneFile(HashMap<String, Object> map) {
 		return uploadMapper.boardSelectOneFile(map);
 	}
-	
-	
+
+
 
 }

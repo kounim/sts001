@@ -7,6 +7,41 @@
 	  FROM jsp.board order by bd_update_at desc
 	</select>
 	
+	<select id="seoulBoard" resultType="com.co.kr.domain.BoardListDomain">
+	  SELECT bd_seq, mb_id, bd_title, bd_content, bd_create_at, bd_update_at
+	  FROM jsp.seoul order by bd_update_at desc
+	</select>
+	
+	<select id="gangBoard" resultType="com.co.kr.domain.BoardListDomain">
+	  SELECT bd_seq, mb_id, bd_title, bd_content, bd_create_at, bd_update_at
+	  FROM jsp.gangwon order by bd_update_at desc
+	</select>
+	
+	<select id="chungBoard" resultType="com.co.kr.domain.BoardListDomain">
+	  SELECT bd_seq, mb_id, bd_title, bd_content, bd_create_at, bd_update_at
+	  FROM jsp.chungcheong order by bd_update_at desc
+	</select>
+	
+	<select id="jeonBoard" resultType="com.co.kr.domain.BoardListDomain">
+	  SELECT bd_seq, mb_id, bd_title, bd_content, bd_create_at, bd_update_at
+	  FROM jsp.jeolla order by bd_update_at desc
+	</select>
+	
+	<select id="gyeongBoard" resultType="com.co.kr.domain.BoardListDomain">
+	  SELECT bd_seq, mb_id, bd_title, bd_content, bd_create_at, bd_update_at
+	  FROM jsp.gyeonggi order by bd_update_at desc
+	</select>
+	
+	<select id="etcBoard" resultType="com.co.kr.domain.BoardListDomain">
+	  SELECT bd_seq, mb_id, bd_title, bd_content, bd_create_at, bd_update_at
+	  FROM jsp.etc order by bd_update_at desc
+	</select>
+	
+	<select id="tradeBoard" resultType="com.co.kr.domain.BoardListDomain">
+	  SELECT bd_seq, mb_id, bd_title, bd_content, bd_create_at, bd_update_at
+	  FROM jsp.trade order by bd_update_at desc
+	</select>
+	
 	<insert id="contentUpload" parameterType="com.co.kr.domain.BoardContentDomain"
 	useGeneratedKeys="true" keyProperty="bdSeq" keyColumn="bd_seq">
 		INSERT INTO jsp.board(
@@ -20,6 +55,7 @@
 			#{bdContent}
 		)
 	</insert>
+	
 	<insert id="fileUpload" parameterType="com.co.kr.domain.BoardFileDomain">
 		INSERT INTO jsp.files(
 			bd_seq,
@@ -72,5 +108,6 @@
     	SELECT bd_seq, mb_id, up_original_file_name, up_new_file_name, up_file_path, up_file_size
     	FROM jsp.view_board where bd_seq = #{bdSeq}
 	</select>
+	
 
 </mapper>
